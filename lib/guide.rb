@@ -1,0 +1,24 @@
+class Guide
+    def initialize(path=nil)
+      # locate the restaurant text file at path
+      # or create a new file
+      # exit if create fails
+    end
+    
+    def launch
+      # intro and plan actions
+      introduction
+      
+      conclusion
+      
+    end
+    
+    def introduction
+      puts "\n\n<<< Welcome to teh food Finder >>>\n\n"
+      puts "This is an interactive guide to help you find the food you crave. \n\n"
+    end
+    
+    def conclusion
+      puts "\n<<< Goodbye and Bon Appetit! >>>\n\n\n"
+    end
+end
