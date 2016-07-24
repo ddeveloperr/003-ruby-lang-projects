@@ -4,7 +4,7 @@ class Guide
   def initialize(path=nil)
     # locate the restaurant text file at path
     Restaurant.filepath = path
-    if Restaurant.file_exist?
+    if Restaurant.file_usable?
       puts "Found restaurant file."
     # or create a new file
     elsif Restaurant.create_file
@@ -19,10 +19,32 @@ class Guide
   def launch!
     introduction
     # action loop
-    #   what do you want to do? (list, find, add, quit)
-    #   do that action
-		# repeat until user quits
-		conclusion
+    loop do
+        #   what do you want to do? (list, find, add, quit)
+        print "> "
+        user_response = gets.chomp
+        #   do that action
+        result = do_action(user_response)
+        # repeat until user quits
+        break if result == :quit
+    end
+    
+	conclusion
+  end
+  
+  def do_action(action)
+    case action
+    when 'list'
+      puts "Listing..."
+    when 'find'
+      puts "Finding..."
+    when 'add'
+      puts "Adding..."
+    when 'quit'
+      return :quit
+    else
+      puts "\nI don't understend that command!"
+    end
   end
 
   def introduction
