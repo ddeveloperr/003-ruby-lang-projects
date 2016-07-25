@@ -60,17 +60,7 @@ class Guide
   
   def add
     puts "\nAdd a restaurant\n\n".upcase
-    restaurant = Restaurant.new
-    
-    print "Restaurant name: "
-    restaurant.name = gets.chomp.strip
-    
-    print "Cuisine type: "
-    restaurant.causine = gets.chomp.strip
-    
-    print "Average price: "
-    restaurant.price = gets.chomp.strip
-    
+    restaurant = Restaurant.build_using_questions
     if restaurant.save
       puts "\nRestaurant added\n"
     else
