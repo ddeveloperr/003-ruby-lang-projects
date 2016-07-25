@@ -2,3 +2,4 @@ Hot Tamale	Mexican	25
 Kibe	Bosnian	10
 Sushi	Japanese	20
 Cafe Masala		30
+Nera		8
