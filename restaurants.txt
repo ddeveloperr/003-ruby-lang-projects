@@ -1,0 +1,3 @@
+Hot Tamale	Mexican	25
+Kibe	Bosnian	10
+Sushi	Japanese	20
