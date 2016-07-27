@@ -1,5 +1,8 @@
-Hot Tamale	Mexican	25
-Kibe	Bosnian	10
-Sushi	Japanese	20
-Cafe Masala		30
-Nera		8
+Kibe	Bosnian	10.2
+Sushi	Japanese	20.666
+Cafe Masala		30.2
+Nera		8.9
+Mrkva	Bosnian	7.1
+Cury	Indian	10.3
+buregdzinica bosna	bosnian	10
+Mrkva	Junk food	7

@@ -1,10 +1,11 @@
 require 'restaurant'
+require 'support/string_extend'
 class Guide
   class Config
-    @@actions = ['list', 'find', 'add', 'quit'] 
+    @@actions = ['list', 'find', 'add', 'quit']
     def self.actions; @@actions; end
   end
-
+  
   def initialize(path=nil)
     # locate the restaurant text file at path
     Restaurant.filepath = path
@@ -15,7 +16,7 @@ class Guide
       puts "Created restaurant file."
     # exit if create fails
     else
-      puts "Exiting. \n\n"
+      puts "Exiting.\n\n"
       exit!
     end
   end
@@ -25,55 +26,73 @@ class Guide
     # action loop
     result = nil
     until result == :quit
-      action = get_action
-      result = do_action(action)
+      action, args = get_action
+      result = do_action(action, args)
     end
-    conclusion
+		conclusion
   end
   
   def get_action
     action = nil
-    # Keep usking for user input until we get a valid action
+    # Keep asking for user input until we get a valid action
     until Guide::Config.actions.include?(action)
-      puts "Actions: " + Guide::Config.actions.join(", ") if action
+      puts "Actions: " + Guide::Config.actions.join(", ")
       print "> "
       user_response = gets.chomp
-      action = user_response.downcase.strip
+      args = user_response.downcase.strip.split(' ')
+      action = args.shift
     end
-    return action
+    return action, args
   end
   
-  def do_action(action)
+  def do_action(action, args=[])
     case action
     when 'list'
       list
     when 'find'
-      puts "Finding..."
+      keyword = args.shift
+      find(keyword)
     when 'add'
       add
     when 'quit'
       return :quit
     else
-      puts "\nI don't understend that command!"
+      puts "\nI don't understand that command.\n"
     end
   end
-  
+
   def list
-    output_action_header("Listing Restaurants")
+    output_action_header("Listing restaurants")
     restaurants = Restaurant.saved_restaurants
     output_restaurant_table(restaurants)
   end
   
-  def add
-    puts "\nAdd a restaurant\n\n".upcase
-    restaurant = Restaurant.build_using_questions
-    if restaurant.save
-      puts "\nRestaurant added\n"
+  def find(keyword="")
+    output_action_header("Find a restaurant")
+    if keyword
+      restaurants = Restaurant.saved_restaurants
+      found = restaurants.select do |rest|
+        rest.name.downcase.include?(keyword.downcase) || 
+        rest.cuisine.downcase.include?(keyword.downcase) || 
+        rest.price.to_i <= keyword.to_i
+      end
+      output_restaurant_table(found)
     else
-      puts "\nSave error: Restaurant not added!\n"
+      puts "Find using a key phrase to search the restaurant list."
+      puts "Examples: 'find tamale', 'find Mexican', 'find mex'\n\n"
     end
   end
-
+  
+  def add
+    output_action_header("Add a restaurant")
+    restaurant = Restaurant.build_using_questions
+    if restaurant.save
+      puts "\nRestaurant Added\n\n"
+    else
+      puts "\nSave Error: Restaurant not added\n\n"
+    end
+  end
+  
   def introduction
     puts "\n\n<<< Welcome to the Food Finder >>>\n\n"
     puts "This is an interactive guide to help you find the food you crave.\n\n"
@@ -94,15 +113,14 @@ class Guide
     print " " + "Cuisine".ljust(20)
     print " " + "Price".rjust(6) + "\n"
     puts "-" * 60
-    
-      restaurants.each do |rest|
+    restaurants.each do |rest|
       line =  " " << rest.name.titleize.ljust(30)
       line << " " + rest.cuisine.titleize.ljust(20)
       line << " " + rest.formatted_price.rjust(6)
       puts line
-      end
+    end
     puts "No listings found" if restaurants.empty?
     puts "-" * 60
   end
-	
+  
 end
