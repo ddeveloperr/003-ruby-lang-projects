@@ -119,7 +119,7 @@ class Guide
 	
 	private
 	
-	def output_action_header(text)
+	def output_action_header(teqxt)
 	  puts "\n#{text.upcase.center(60)}\n\n"
 	end
 	
