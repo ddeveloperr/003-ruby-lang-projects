@@ -2,6 +2,16 @@
 ===============
 Pure Ruby program that allow us to find the food, add, list, find and sort restaurant 
 
-->![Result:](https://raw.githubusercontent.com/ddeveloperr/food_finder/master/lib/img/result.png)<- 
+--------------
+Result
+--------------
+.. image:: https://raw.githubusercontent.com/ddeveloperr/food_finder/master/lib/img/result.png
+    :alt: Result
+    :width: 679
+    :height: 781
+    :align: center
 
-
+--------------
+.. image:: https://raw.githubusercontent.com/ddeveloperr/food_finder/master/lib/img/result.png
+     :display: block
+     :margin:  0 auto
