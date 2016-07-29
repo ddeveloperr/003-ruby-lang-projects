@@ -4,7 +4,5 @@ Pure Ruby program that allow us to find the food, add, list, find and sort resta
 
 Result: 
 
-.. image:: https://raw.githubusercontent.com/ddeveloperr/food_finder/master/lib/img/result.png
-    :alt: Result
-    :align: center
+![Result](https://raw.githubusercontent.com/ddeveloperr/food_finder/master/lib/img/result.png)
 
